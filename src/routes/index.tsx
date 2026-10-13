@@ -1,46 +1,76 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { ProductCard } from "@/components/shop/ProductCard";
-import { SiteHeader } from "@/components/shop/SiteHeader";
+import { PageShell } from "@/components/shop/PageShell";
+import { Button } from "@/components/ui/button";
 import { fetchProducts } from "@/lib/shopify";
+
+const PRODUCT_HANDLE = "foldit-3-i-1-mattsats";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Foldit – smarta måttsatser för köket" },
-      { name: "description", content: "Handla Foldit 3-i-1 måttsats – hopfällbar och platsbesparande. Säker kassa via Shopify." },
+      { name: "description", content: "Mät. Vik. Skrapa. Foldit 3-i-1 måttsats – hopfällbar, platsbesparande och gjord så att sirap och smet aldrig fastnar." },
       { property: "og:title", content: "Foldit – smarta måttsatser för köket" },
-      { property: "og:description", content: "Handla Foldit 3-i-1 måttsats – hopfällbar och platsbesparande." },
+      { property: "og:description", content: "Mät. Vik. Skrapa. Måttsats och slickepott i ett." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Index,
 });
 
+function Hero() {
+  return (
+    <section className="relative w-full overflow-hidden bg-obsidian">
+      {/* Mobil 9:16, desktop 16:9. Byt ut placeholdern mot <video> när filmerna är klara. */}
+      <div className="relative aspect-[9/16] w-full md:aspect-video">
+        <div className="absolute inset-0 flex items-start justify-center bg-destructive/90 p-4 text-center">
+          <p className="rounded bg-background/90 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-destructive">
+            <span className="md:hidden">Lägg in hero-video (9:16, mobil) från kolakaksinspelningen</span>
+            <span className="hidden md:inline">Lägg in hero-video (16:9, desktop) från kolakaksinspelningen</span>
+          </p>
+        </div>
+
+        <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 via-obsidian/10 to-transparent" />
+
+        <div className="absolute inset-0 flex flex-col items-center justify-end px-6 pb-14 text-center sm:pb-20">
+          <h1 className="font-display text-5xl font-semibold leading-[1.05] tracking-tight text-obsidian-foreground sm:text-6xl lg:text-7xl">
+            Mät. Vik. Skrapa.
+          </h1>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-obsidian-foreground/90 sm:text-base">
+            Måttsats och slickepott i ett. Designad för att sirap, honung och smet aldrig ska fastna.
+          </p>
+          <Button
+            asChild
+            size="lg"
+            className="mt-8 rounded-none border border-obsidian-foreground/40 bg-obsidian px-8 text-xs font-medium uppercase tracking-[0.18em] text-obsidian-foreground hover:bg-obsidian/90"
+          >
+            <Link to="/product/$handle" params={{ handle: PRODUCT_HANDLE }}>
+              Upptäck måttsatsen
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Index() {
   const { data, isLoading, error } = useQuery({ queryKey: ["products"], queryFn: () => fetchProducts(24) });
 
   return (
-    <div className="min-h-screen">
-      <SiteHeader />
-      <section className="border-b border-border bg-secondary">
-        <div className="mx-auto max-w-6xl px-5 py-16 sm:py-24">
-          <p className="mb-3 text-sm font-bold uppercase tracking-widest text-accent-foreground/70">Foldit UF</p>
-          <h1 className="max-w-2xl text-4xl font-semibold leading-tight text-primary sm:text-6xl">
-            Mät smartare. Spara plats i köket.
-          </h1>
-          <p className="mt-5 max-w-xl text-lg text-muted-foreground">
-            Hopfällbara måttsatser som gör vardagsbaket och matlagningen enklare.
-          </p>
-        </div>
-      </section>
+    <PageShell>
+      <Hero />
 
-      <main className="mx-auto max-w-6xl px-5 py-14">
+      <section className="mx-auto max-w-6xl px-5 py-14">
         <h2 className="mb-8 text-[2.75rem] font-semibold leading-tight tracking-tight">Produkter</h2>
         {isLoading && <p className="text-muted-foreground">Laddar produkter…</p>}
         {error && <p className="text-destructive">Kunde inte hämta produkterna just nu.</p>}
         {data && data.length === 0 && (
           <p className="rounded-xl border border-dashed border-border p-10 text-center text-muted-foreground">
-            Inga produkter hittades. Be mig skapa en produkt i chatten, så dyker den upp här.
+            Inga produkter hittades.
           </p>
         )}
         {data && data.length > 0 && (
@@ -50,11 +80,7 @@ function Index() {
             ))}
           </div>
         )}
-      </main>
-
-      <footer className="border-t border-border py-8 text-center text-sm text-muted-foreground">
-        © Foldit UF · Betalning och frakt hanteras säkert i Shopifys kassa
-      </footer>
-    </div>
+      </section>
+    </PageShell>
   );
 }
