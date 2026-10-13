@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { PageShell } from "@/components/shop/PageShell";
 import { PurchasePresentation } from "@/components/shop/PurchasePresentation";
+import { HowItWorks } from "@/components/shop/HowItWorks";
 import { fetchProductByHandle } from "@/lib/shopify";
 
 export const Route = createFileRoute("/product/$handle")({
@@ -29,7 +30,12 @@ function ProductPage() {
       <div className="mx-auto max-w-6xl px-5 pt-6 lg:px-8">
         <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">← Tillbaka</Link>
       </div>
-      {!isLoading && !product ? <p className="mx-auto max-w-6xl px-5 py-10">Produkten hittades inte.</p> : <PurchasePresentation product={product} isLoading={isLoading} heading="h1" />}
+      {!isLoading && !product ? <p className="mx-auto max-w-6xl px-5 py-10">Produkten hittades inte.</p> : (
+        <>
+          <PurchasePresentation product={product} isLoading={isLoading} heading="h1" />
+          <HowItWorks />
+        </>
+      )}
     </PageShell>
   );
 }
