@@ -13,11 +13,13 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
   heading?: "h1" | "h2";
 }) {
   const [imageIndex, setImageIndex] = useState(0);
+  const [isPreviewing, setIsPreviewing] = useState(false);
   const [variantIndex, setVariantIndex] = useState(0);
   const addItem = useCartStore((s) => s.addItem);
   const loading = useCartStore((s) => s.loading);
   const variant = product?.variants.edges[variantIndex]?.node;
-  const imagePlan = productImagePlans[imageIndex] ?? productImagePlans[0];
+  const visibleImageIndex = isPreviewing && imageIndex === 0 ? 1 : imageIndex;
+  const imagePlan = productImagePlans[visibleImageIndex] ?? productImagePlans[0];
   const Heading = heading;
 
   async function add() {
@@ -31,21 +33,24 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
   }
 
   function stepImage(direction: number) {
-    setImageIndex((current) => (current + direction + productImagePlans.length) % productImagePlans.length);
+    setImageIndex((visibleImageIndex + direction + productImagePlans.length) % productImagePlans.length);
+    setIsPreviewing(false);
   }
 
   return (
     <section aria-label="Köp Foldit 3-i-1" className="mx-auto max-w-6xl px-5 py-8 sm:py-10 lg:px-8">
       <div className="grid items-stretch gap-6 md:grid-cols-2 lg:gap-10">
         <div className="flex min-w-0 flex-col gap-3" data-testid="purchase-gallery">
-          <div className="relative flex aspect-[4/5] flex-col justify-center bg-destructive p-6 text-center text-destructive-foreground md:aspect-auto md:min-h-[420px] md:flex-1" aria-live="polite">
-            <span className="absolute left-5 top-5 text-xs">Produktbild {imageIndex + 1} / {productImagePlans.length}</span>
+          <div className="relative flex aspect-[4/5] flex-col justify-center bg-destructive p-6 text-center text-destructive-foreground md:aspect-auto md:min-h-[460px] md:flex-1" aria-live="polite"
+            onPointerEnter={(event) => { if (event.pointerType === "mouse") setIsPreviewing(true); }}
+            onPointerLeave={() => setIsPreviewing(false)}>
+            <span className="absolute left-5 top-5 text-xs">Produktbild {visibleImageIndex + 1} / {productImagePlans.length}</span>
             <div className="mx-auto max-w-sm">
               <p className="text-xs font-medium uppercase">Lägg in produktbild</p>
               <p className="mt-3 font-display text-4xl font-semibold">{imagePlan.title}</p>
               <p className="mt-4 text-sm leading-relaxed">{imagePlan.instruction}</p>
             </div>
-            {imageIndex === 4 && (
+            {visibleImageIndex === 4 && (
               <div className="mt-8 grid grid-cols-3 divide-x divide-destructive-foreground/40 border-y border-destructive-foreground/40 py-5 text-sm font-semibold">
                 <span>1 tsk<br /><span className="text-xs font-normal">(tsp)</span></span>
                 <span>1 msk</span>
@@ -57,20 +62,10 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
               <Button variant="ghost" size="icon" className="text-destructive-foreground hover:bg-destructive-foreground/15 hover:text-destructive-foreground" onClick={() => stepImage(1)} aria-label="Nästa produktbild"><ChevronRight /></Button>
             </div>
           </div>
-          <div className="grid grid-cols-5 gap-2" aria-label="Välj produktbild">
-            {productImagePlans.map((plan, index) => (
-              <Button key={plan.title} variant="ghost" onClick={() => setImageIndex(index)} aria-label={`Produktbild ${index + 1}: ${plan.title}`} aria-pressed={imageIndex === index}
-                className={`h-auto min-w-0 flex-col gap-1 whitespace-normal rounded-none border-2 bg-destructive/10 px-1 py-2 text-center hover:bg-destructive/20 ${imageIndex === index ? "border-obsidian" : "border-transparent"}`}>
-                <span className="text-sm font-semibold text-destructive">{String(index + 1).padStart(2, "0")}</span>
-                <span className="text-[10px] leading-tight text-foreground">{plan.title}</span>
-              </Button>
-            ))}
-          </div>
         </div>
 
         <div className="flex min-w-0 flex-col" data-testid="purchase-details">
-          <p className="text-xs uppercase text-muted-foreground">Förbeställning</p>
-          <Heading className="mt-2 text-4xl font-semibold leading-tight lg:text-5xl">Foldit 3-i-1 måttsats</Heading>
+          <Heading className="text-4xl font-semibold leading-tight lg:text-5xl">Foldit 3-i-1 måttsats</Heading>
           {variant && <p className="mt-3 text-xl font-medium">{formatPrice(variant.price.amount, variant.price.currencyCode)}</p>}
           {isLoading && <p className="mt-3 text-sm text-muted-foreground">Laddar…</p>}
           <p className="mt-5 text-sm leading-relaxed"><strong className="font-medium">Mått och slickepott i ett.</strong><br />Designad för att sirap, honung och klibbig smet aldrig ska fastna i måttet.</p>
