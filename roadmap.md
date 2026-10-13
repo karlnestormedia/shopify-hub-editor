@@ -3,4 +3,4 @@
 - [x] Fem bildplatser, kort beskrivning och leveranstid.
 - [x] Kontrollera bildväxling, höjdjustering och befintlig varukorg (Shopify nekar köp eftersom produkten är slutsåld; lagerinställning ändras inte i denna uppgift).
 - [x] Ta bort numrerade bildknappar och förbeställningstext, växla bild vid pekare över bildytan och verifiera pilar samt lika höga kolumner.
-- [ ] Lägg till och verifiera trestegssektionen på startsidan med röda bildinstruktioner enligt referensbilden.
+- [x] Lägg till och verifiera trestegssektionen på startsidan med röda bildinstruktioner enligt referensbilden.
