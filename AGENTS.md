@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Share the purchase presentation between the home and product routes so galleries, delivery information and purchase controls remain consistent.
+- Keep presentation copy separate from Shopify product data; storefront design changes must not modify the existing Shopify store.
