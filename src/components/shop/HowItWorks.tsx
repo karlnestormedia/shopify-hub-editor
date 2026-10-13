@@ -25,10 +25,10 @@ export function HowItWorks() {
           <h2 id="how-it-works-title" className="mt-3 font-display text-4xl font-semibold sm:text-5xl">Så använder du Foldit</h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Från mått till slickepott i en rörelse.</p>
         </div>
-        <ol className="grid gap-8 sm:grid-cols-3 sm:gap-5 lg:gap-6">
+        <ol className="grid gap-8 md:grid-cols-3 md:gap-5 lg:gap-6">
           {steps.map((step, index) => (
             <li key={step.title} className="min-w-0">
-              <div className="relative flex aspect-[3/4] flex-col items-center justify-center overflow-hidden rounded-lg bg-destructive px-5 pb-20 pt-16 text-center text-destructive-foreground">
+              <div className="relative flex aspect-[3/4] min-h-[360px] flex-col items-center justify-center overflow-hidden rounded-lg bg-destructive px-5 pb-20 pt-16 text-center text-destructive-foreground">
                 <span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-obsidian text-xs font-medium text-obsidian-foreground" aria-label={`Steg ${index + 1}`}>{String(index + 1).padStart(2, "0")}</span>
                 <p className="text-[11px] font-semibold uppercase">Lägg in bild · 3:4</p>
                 <p className="mt-3 max-w-xs text-sm leading-relaxed">{step.image}</p>
