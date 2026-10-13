@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CreditCard, Truck, RotateCcw, ChevronLeft, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/
 import { formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { formatDeliveryWindow, productImagePlans } from "@/lib/product-presentation";
 import { useCartStore } from "@/stores/cartStore";
+import { StickyBuyBar } from "@/components/shop/StickyBuyBar";
 
 export function PurchasePresentation({ product, isLoading = false, heading = "h2" }: {
   product?: ShopifyProduct["node"] | null | undefined;
@@ -15,6 +16,9 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
   const [imageIndex, setImageIndex] = useState(0);
   const [isPreviewing, setIsPreviewing] = useState(false);
   const [variantIndex, setVariantIndex] = useState(0);
+  const [showSticky, setShowSticky] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const swipeStart = useRef<number | null>(null);
   const addItem = useCartStore((s) => s.addItem);
   const loading = useCartStore((s) => s.loading);
   const variant = product?.variants.edges[variantIndex]?.node;
@@ -37,13 +41,33 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
     setIsPreviewing(false);
   }
 
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry) setShowSticky(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section aria-label="Köp Foldit 3-i-1" className="mx-auto max-w-6xl px-5 py-8 sm:py-10 lg:px-8">
+    <section ref={sectionRef} aria-label="Köp Foldit 3-i-1" className="mx-auto max-w-6xl px-5 py-8 sm:py-10 lg:px-8">
+      <StickyBuyBar visible={showSticky} price={variant ? formatPrice(variant.price.amount, variant.price.currencyCode) : undefined} disabled={loading || !variant} loading={loading} onAdd={add} />
       <div className="grid items-stretch gap-6 md:grid-cols-2 lg:gap-10">
         <div className="flex min-w-0 flex-col gap-3" data-testid="purchase-gallery">
-          <div className="relative flex aspect-[4/5] flex-col justify-center bg-destructive p-6 text-center text-destructive-foreground md:aspect-auto md:min-h-[460px] md:flex-1" aria-live="polite"
+          <div className="relative flex aspect-[4/5] touch-pan-y select-none flex-col justify-center bg-destructive p-6 text-center text-destructive-foreground md:aspect-auto md:min-h-[460px] md:flex-1" aria-live="polite"
             onPointerEnter={(event) => { if (event.pointerType === "mouse") setIsPreviewing(true); }}
-            onPointerLeave={() => setIsPreviewing(false)}>
+            onPointerLeave={() => setIsPreviewing(false)}
+            onPointerDown={(event) => { if (event.pointerType !== "mouse") swipeStart.current = event.clientX; }}
+            onPointerUp={(event) => {
+              const start = swipeStart.current;
+              swipeStart.current = null;
+              if (start === null) return;
+              const dx = event.clientX - start;
+              if (Math.abs(dx) > 40) stepImage(dx < 0 ? 1 : -1);
+            }}
+            onPointerCancel={() => { swipeStart.current = null; }}>
             <span className="absolute left-5 top-5 text-xs">Produktbild {visibleImageIndex + 1} / {productImagePlans.length}</span>
             <div className="mx-auto max-w-sm">
               <p className="text-xs font-medium uppercase">Lägg in produktbild</p>
