@@ -123,6 +123,22 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  // Recover once from stale chunk loads (e.g. after a dev-server restart or new deploy).
+  useEffect(() => {
+    const onPreloadError = (event: Event) => {
+      event.preventDefault();
+      if (sessionStorage.getItem("foldit-chunk-reload")) return;
+      sessionStorage.setItem("foldit-chunk-reload", "1");
+      window.location.reload();
+    };
+    window.addEventListener("vite:preloadError", onPreloadError);
+    const clear = window.setTimeout(() => sessionStorage.removeItem("foldit-chunk-reload"), 10000);
+    return () => {
+      window.removeEventListener("vite:preloadError", onPreloadError);
+      window.clearTimeout(clear);
+    };
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
