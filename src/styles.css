@@ -19,6 +19,9 @@
  */
 
 @theme inline {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -140,11 +143,15 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: "DM Sans", system-ui, sans-serif;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, .font-display {
-    font-family: "Fraunces", Georgia, serif;
-    letter-spacing: -0.01em;
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: 0;
   }
 }

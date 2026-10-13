@@ -32,7 +32,7 @@ export function ProductCard({ product }: { product: ShopifyProduct }) {
       </Link>
       <div className="space-y-3 p-5">
         <Link to="/product/$handle" params={{ handle: node.handle }}>
-          <h3 className="text-xl font-medium leading-snug">{node.title}</h3>
+          <h3 className="text-2xl font-semibold leading-tight">{node.title}</h3>
         </Link>
         <p className="line-clamp-2 text-sm text-muted-foreground">{node.description}</p>
         <div className="flex items-center justify-between pt-1">
