@@ -11,3 +11,4 @@
 
 - Share the purchase presentation between the home and product routes so galleries, delivery information and purchase controls remain consistent.
 - Keep presentation copy separate from Shopify product data; storefront design changes must not modify the existing Shopify store.
+- Keep the home-page usage walkthrough in a standalone presentation component, independent of Shopify data, so instructional imagery and copy can change without affecting commerce.
