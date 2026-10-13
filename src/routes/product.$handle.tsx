@@ -71,7 +71,7 @@ function ProductPage() {
               )}
             </div>
             <div className="space-y-5">
-              <h1 className="text-3xl font-semibold sm:text-4xl">{product.title}</h1>
+              <h1 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">{product.title}</h1>
               {variant && (
                 <p className="text-2xl font-bold">{formatPrice(variant.price.amount, variant.price.currencyCode)}</p>
               )}

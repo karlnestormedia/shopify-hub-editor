@@ -35,7 +35,7 @@ function Index() {
       </section>
 
       <main className="mx-auto max-w-6xl px-5 py-14">
-        <h2 className="mb-8 text-3xl font-semibold">Produkter</h2>
+        <h2 className="mb-8 text-4xl font-semibold tracking-tight">Produkter</h2>
         {isLoading && <p className="text-muted-foreground">Laddar produkter…</p>}
         {error && <p className="text-destructive">Kunde inte hämta produkterna just nu.</p>}
         {data && data.length === 0 && (
