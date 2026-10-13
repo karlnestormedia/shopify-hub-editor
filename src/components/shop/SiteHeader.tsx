@@ -31,7 +31,11 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
+    <header className="sticky top-0 z-40">
+      <div className="bg-obsidian py-2 text-center text-xs tracking-wide text-obsidian-foreground">
+        Fri frakt på alla beställningar
+      </div>
+      <div className="border-b border-border bg-nude text-nude-foreground">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
         <Link to="/" className="font-display text-3xl font-semibold tracking-tight text-primary">
           Foldit
@@ -106,6 +110,7 @@ export function SiteHeader() {
             )}
           </SheetContent>
         </Sheet>
+      </div>
       </div>
     </header>
   );
