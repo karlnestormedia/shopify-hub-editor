@@ -4,6 +4,7 @@ import { PageShell } from "@/components/shop/PageShell";
 import { Button } from "@/components/ui/button";
 import { fetchProductByHandle } from "@/lib/shopify";
 import { PurchasePresentation } from "@/components/shop/PurchasePresentation";
+import { HowItWorks } from "@/components/shop/HowItWorks";
 
 const PRODUCT_HANDLE = "foldit-3-i-1-mattsats";
 
@@ -70,6 +71,7 @@ function Index() {
     <PageShell>
       <Hero />
       <ProductShowcase />
+      <HowItWorks />
     </PageShell>
   );
 }
