@@ -128,7 +128,7 @@ function mapCart(cart: any): CartState {
     totalQuantity: cart.totalQuantity,
     total: cart.cost.totalAmount,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    lines: cart.lines.edges.map(({ node }: any) => ({
+    lines: cart.lines.edges.filter(({ node }: any) => node.quantity > 0).map(({ node }: any) => ({
       id: node.id,
       quantity: node.quantity,
       variantId: node.merchandise.id,
@@ -142,25 +142,32 @@ function mapCart(cart: any): CartState {
   };
 }
 
+function stockWarning(warnings: Array<{ message: string; code: string }> | undefined) {
+  const w = warnings?.find((x) => x.code.startsWith("MERCHANDISE_"));
+  if (w) throw new Error(w.message);
+}
+
 function userErrors(errors: Array<{ message: string }> | undefined) {
   if (errors && errors.length) throw new Error(errors.map((e) => e.message).join(", "));
 }
 
 export async function cartCreate(variantId: string, quantity: number): Promise<CartState> {
   const data = await storefrontApiRequest(
-    `mutation($input: CartInput!) { cartCreate(input: $input) { cart { ${CART_FIELDS} } userErrors { message } } }`,
+    `mutation($input: CartInput!) { cartCreate(input: $input) { cart { ${CART_FIELDS} } userErrors { message } warnings { message code } } }`,
     { input: { lines: [{ merchandiseId: variantId, quantity }] } },
   );
   userErrors(data.data.cartCreate.userErrors);
+  stockWarning(data.data.cartCreate.warnings);
   return mapCart(data.data.cartCreate.cart);
 }
 
 export async function cartLinesAdd(cartId: string, variantId: string, quantity: number): Promise<CartState> {
   const data = await storefrontApiRequest(
-    `mutation($cartId: ID!, $lines: [CartLineInput!]!) { cartLinesAdd(cartId: $cartId, lines: $lines) { cart { ${CART_FIELDS} } userErrors { message } } }`,
+    `mutation($cartId: ID!, $lines: [CartLineInput!]!) { cartLinesAdd(cartId: $cartId, lines: $lines) { cart { ${CART_FIELDS} } userErrors { message } warnings { message code } } }`,
     { cartId, lines: [{ merchandiseId: variantId, quantity }] },
   );
   userErrors(data.data.cartLinesAdd.userErrors);
+  stockWarning(data.data.cartLinesAdd.warnings);
   return mapCart(data.data.cartLinesAdd.cart);
 }
 
