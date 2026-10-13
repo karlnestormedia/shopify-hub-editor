@@ -8,7 +8,7 @@ import { formatDeliveryWindow, productImagePlans } from "@/lib/product-presentat
 import { useCartStore } from "@/stores/cartStore";
 
 export function PurchasePresentation({ product, isLoading = false, heading = "h2" }: {
-  product?: ShopifyProduct["node"] | null;
+  product?: ShopifyProduct["node"] | null | undefined;
   isLoading?: boolean;
   heading?: "h1" | "h2";
 }) {
@@ -36,10 +36,10 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
 
   return (
     <section aria-label="Köp Foldit 3-i-1" className="mx-auto max-w-6xl px-5 py-8 sm:py-10 lg:px-8">
-      <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-10">
+      <div className="grid items-stretch gap-6 md:grid-cols-2 lg:gap-10">
         <div className="flex min-w-0 flex-col gap-3" data-testid="purchase-gallery">
-          <div className="relative flex aspect-[4/5] flex-col justify-center bg-destructive p-6 text-center text-destructive-foreground lg:aspect-auto lg:min-h-[420px] lg:flex-1" aria-live="polite">
-            <span className="absolute left-5 top-5 text-xs">Produktbild {imageIndex + 1} / {productImagePlans.length} · 4:5</span>
+          <div className="relative flex aspect-[4/5] flex-col justify-center bg-destructive p-6 text-center text-destructive-foreground md:aspect-auto md:min-h-[420px] md:flex-1" aria-live="polite">
+            <span className="absolute left-5 top-5 text-xs">Produktbild {imageIndex + 1} / {productImagePlans.length}</span>
             <div className="mx-auto max-w-sm">
               <p className="text-xs font-medium uppercase">Lägg in produktbild</p>
               <p className="mt-3 font-display text-4xl font-semibold">{imagePlan.title}</p>
@@ -70,7 +70,7 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
 
         <div className="flex min-w-0 flex-col" data-testid="purchase-details">
           <p className="text-xs uppercase text-muted-foreground">Förbeställning</p>
-          <Heading className="mt-2 text-4xl font-semibold leading-tight sm:text-5xl">Foldit 3-i-1 måttsats</Heading>
+          <Heading className="mt-2 text-4xl font-semibold leading-tight lg:text-5xl">Foldit 3-i-1 måttsats</Heading>
           {variant && <p className="mt-3 text-xl font-medium">{formatPrice(variant.price.amount, variant.price.currencyCode)}</p>}
           {isLoading && <p className="mt-3 text-sm text-muted-foreground">Laddar…</p>}
           <p className="mt-5 text-sm leading-relaxed"><strong className="font-medium">Mått och slickepott i ett.</strong><br />Designad för att sirap, honung och klibbig smet aldrig ska fastna i måttet.</p>
