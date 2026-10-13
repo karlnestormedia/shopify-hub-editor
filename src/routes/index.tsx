@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { fetchProductByHandle } from "@/lib/shopify";
 import { PurchasePresentation } from "@/components/shop/PurchasePresentation";
 import { HowItWorks } from "@/components/shop/HowItWorks";
+import { Faq } from "@/components/shop/Faq";
 
 const PRODUCT_HANDLE = "foldit-3-i-1-mattsats";
 
@@ -72,6 +73,7 @@ function Index() {
       <Hero />
       <ProductShowcase />
       <HowItWorks />
+      <Faq />
     </PageShell>
   );
 }
