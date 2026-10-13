@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 export function StickyBuyBar({ visible, price, disabled, loading, onAdd }: {
   visible: boolean;
-  price?: string;
+  price?: string | undefined;
   disabled: boolean;
   loading: boolean;
   onAdd: () => void;

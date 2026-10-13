@@ -45,7 +45,7 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
     const el = sectionRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(([entry]) => {
-      setShowSticky(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+      if (entry) setShowSticky(!entry.isIntersecting && entry.boundingClientRect.top < 0);
     });
     observer.observe(el);
     return () => observer.disconnect();
