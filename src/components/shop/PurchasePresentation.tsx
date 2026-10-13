@@ -1,0 +1,98 @@
+import { useState } from "react";
+import { CreditCard, Truck, RotateCcw, ChevronLeft, ChevronRight } from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { formatPrice, type ShopifyProduct } from "@/lib/shopify";
+import { formatDeliveryWindow, productImagePlans } from "@/lib/product-presentation";
+import { useCartStore } from "@/stores/cartStore";
+
+export function PurchasePresentation({ product, isLoading = false, heading = "h2" }: {
+  product?: ShopifyProduct["node"] | null | undefined;
+  isLoading?: boolean;
+  heading?: "h1" | "h2";
+}) {
+  const [imageIndex, setImageIndex] = useState(0);
+  const [variantIndex, setVariantIndex] = useState(0);
+  const addItem = useCartStore((s) => s.addItem);
+  const loading = useCartStore((s) => s.loading);
+  const variant = product?.variants.edges[variantIndex]?.node;
+  const imagePlan = productImagePlans[imageIndex] ?? productImagePlans[0];
+  const Heading = heading;
+
+  async function add() {
+    if (!variant) return;
+    try {
+      await addItem(variant.id, 1);
+      toast.success("Lagd i varukorgen");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Kunde inte lägga till");
+    }
+  }
+
+  function stepImage(direction: number) {
+    setImageIndex((current) => (current + direction + productImagePlans.length) % productImagePlans.length);
+  }
+
+  return (
+    <section aria-label="Köp Foldit 3-i-1" className="mx-auto max-w-6xl px-5 py-8 sm:py-10 lg:px-8">
+      <div className="grid items-stretch gap-6 md:grid-cols-2 lg:gap-10">
+        <div className="flex min-w-0 flex-col gap-3" data-testid="purchase-gallery">
+          <div className="relative flex aspect-[4/5] flex-col justify-center bg-destructive p-6 text-center text-destructive-foreground md:aspect-auto md:min-h-[420px] md:flex-1" aria-live="polite">
+            <span className="absolute left-5 top-5 text-xs">Produktbild {imageIndex + 1} / {productImagePlans.length}</span>
+            <div className="mx-auto max-w-sm">
+              <p className="text-xs font-medium uppercase">Lägg in produktbild</p>
+              <p className="mt-3 font-display text-4xl font-semibold">{imagePlan.title}</p>
+              <p className="mt-4 text-sm leading-relaxed">{imagePlan.instruction}</p>
+            </div>
+            {imageIndex === 4 && (
+              <div className="mt-8 grid grid-cols-3 divide-x divide-destructive-foreground/40 border-y border-destructive-foreground/40 py-5 text-sm font-semibold">
+                <span>1 tsk<br /><span className="text-xs font-normal">(tsp)</span></span>
+                <span>1 msk</span>
+                <span>½ dl</span>
+              </div>
+            )}
+            <div className="absolute bottom-4 left-4 right-4 flex justify-between">
+              <Button variant="ghost" size="icon" className="text-destructive-foreground hover:bg-destructive-foreground/15 hover:text-destructive-foreground" onClick={() => stepImage(-1)} aria-label="Föregående produktbild"><ChevronLeft /></Button>
+              <Button variant="ghost" size="icon" className="text-destructive-foreground hover:bg-destructive-foreground/15 hover:text-destructive-foreground" onClick={() => stepImage(1)} aria-label="Nästa produktbild"><ChevronRight /></Button>
+            </div>
+          </div>
+          <div className="grid grid-cols-5 gap-2" aria-label="Välj produktbild">
+            {productImagePlans.map((plan, index) => (
+              <Button key={plan.title} variant="ghost" onClick={() => setImageIndex(index)} aria-label={`Produktbild ${index + 1}: ${plan.title}`} aria-pressed={imageIndex === index}
+                className={`h-auto min-w-0 flex-col gap-1 whitespace-normal rounded-none border-2 bg-destructive/10 px-1 py-2 text-center hover:bg-destructive/20 ${imageIndex === index ? "border-obsidian" : "border-transparent"}`}>
+                <span className="text-sm font-semibold text-destructive">{String(index + 1).padStart(2, "0")}</span>
+                <span className="text-[10px] leading-tight text-foreground">{plan.title}</span>
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex min-w-0 flex-col" data-testid="purchase-details">
+          <p className="text-xs uppercase text-muted-foreground">Förbeställning</p>
+          <Heading className="mt-2 text-4xl font-semibold leading-tight lg:text-5xl">Foldit 3-i-1 måttsats</Heading>
+          {variant && <p className="mt-3 text-xl font-medium">{formatPrice(variant.price.amount, variant.price.currencyCode)}</p>}
+          {isLoading && <p className="mt-3 text-sm text-muted-foreground">Laddar…</p>}
+          <p className="mt-5 text-sm leading-relaxed"><strong className="font-medium">Mått och slickepott i ett.</strong><br />Designad för att sirap, honung och klibbig smet aldrig ska fastna i måttet.</p>
+          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
+            <li><strong className="font-medium text-foreground">3 mått i samma verktyg:</strong> ½ dl, 1 msk och 1 tsk.</li>
+            <li><strong className="font-medium text-foreground">Vik & skrapa:</strong> Skrapar bunken ren i samma rörelse.</li>
+            <li><strong className="font-medium text-foreground">Tar ingen plats:</strong> Förvaras helt platt i kökslådan.</li>
+          </ul>
+          {(product?.variants.edges.length ?? 0) > 1 && <div className="mt-4 flex flex-wrap gap-2">{product?.variants.edges.map(({ node }, index) => <Button key={node.id} size="sm" variant={index === variantIndex ? "default" : "outline"} onClick={() => setVariantIndex(index)}>{node.title}</Button>)}</div>}
+          <Button size="lg" className="mt-5 h-12 w-full rounded-none bg-obsidian text-xs uppercase text-obsidian-foreground hover:bg-obsidian/90" disabled={loading || !variant} onClick={add}>{loading ? "Lägger till…" : "Lägg i varukorg"}</Button>
+          <div className="mt-4 grid grid-cols-3 gap-2 border-b border-border pb-4 text-center text-[11px] leading-relaxed text-muted-foreground">
+            <div className="flex flex-col items-center gap-2"><CreditCard className="h-5 w-5 text-foreground" strokeWidth={1.5} aria-hidden="true" /><span>Säker betalning<br />via Shopify</span></div>
+            <div className="flex flex-col items-center gap-2"><Truck className="h-5 w-5 text-foreground" strokeWidth={1.5} aria-hidden="true" /><span>{formatDeliveryWindow()}</span></div>
+            <div className="flex flex-col items-center gap-2"><RotateCcw className="h-5 w-5 text-foreground" strokeWidth={1.5} aria-hidden="true" /><span>14 dagars<br />öppet köp</span></div>
+          </div>
+          <Accordion type="single" collapsible className="mt-auto pt-2">
+            <AccordionItem value="measures"><AccordionTrigger className="py-3">Specifikationer & mått</AccordionTrigger><AccordionContent>Tre mått i ett verktyg: 1 tsk, 1 msk och ½ dl. Viks ut helt platt för förvaring.</AccordionContent></AccordionItem>
+            <AccordionItem value="delivery"><AccordionTrigger className="py-3">Frakt & leverans</AccordionTrigger><AccordionContent>{formatDeliveryWindow()}. Fraktalternativ och kostnad visas i Shopifys kassa.</AccordionContent></AccordionItem>
+            <AccordionItem value="care"><AccordionTrigger className="py-3">Skötsel & rengöring</AccordionTrigger><AccordionContent>Vik ut måttet och skölj av under rinnande vatten. Låt torka innan det läggs i kökslådan.</AccordionContent></AccordionItem>
+          </Accordion>
+        </div>
+      </div>
+    </section>
+  );
+}
