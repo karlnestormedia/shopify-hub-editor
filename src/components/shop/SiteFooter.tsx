@@ -26,8 +26,7 @@ export function SiteFooter() {
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.18em]">Kontakt</p>
           <ul className="mt-4 space-y-2 text-sm text-obsidian-foreground/70">
-            <li>hej@foldit.se</li>
-            <li>Instagram: @foldit.uf</li>
+            <li><a href="mailto:info@foldit.se" className={linkCls}>info@foldit.se</a></li>
             <li>Vi svarar inom 24 timmar</li>
           </ul>
         </div>

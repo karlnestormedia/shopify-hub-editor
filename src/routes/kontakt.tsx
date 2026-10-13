@@ -33,8 +33,11 @@ function Kontakt() {
           <div>
             <h2 className="text-2xl font-semibold">Hör av dig</h2>
             <p className="mt-3 text-muted-foreground">
-              Skicka ett meddelande till oss så återkommer vi så snart vi kan. Kontaktuppgifterna publiceras
-              här när butiken är helt klar.
+              Skicka ett meddelande till{" "}
+              <a href="mailto:info@foldit.se" className="font-medium text-foreground underline underline-offset-4">
+                info@foldit.se
+              </a>{" "}
+              så återkommer vi så snart vi kan.
             </p>
           </div>
           <div>
