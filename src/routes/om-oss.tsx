@@ -22,8 +22,8 @@ export const Route = createFileRoute("/om-oss")({
 
 const timeline = [
   { step: "Idén", text: "Sirap och honung som fastnar i måttet, och en kökslåda full av mått. Vi ville lösa båda problemen med ett enda redskap." },
-  { step: "Prototyperna", text: "Vi testade form, material och vikning tills ett verktyg kunde bli ½ dl, 1 msk och 1 tsk – och skrapa bunken ren." },
-  { step: "Produktionen", text: "Foldit är just nu under produktion. Varje detalj är framtagen för att förvaras platt och rengöras enkelt." },
+  { step: "Prototyperna", text: "Vi testade form, material och funktion. Detta resulterade i Foldit. ½ dl, 1 msk, 1 tsk + 1 slickepott. Allt i ett verktyg." },
+  { step: "Produktionen", text: "Foldit är designad och producerad i Sverige. Med ett mål att göra vardagen enklare." },
   { step: "Lanseringen", text: "Förbeställningen öppnar snart. Därefter skickas måttsatsen med 1-3 dagars leveranstid." },
 ];
 
