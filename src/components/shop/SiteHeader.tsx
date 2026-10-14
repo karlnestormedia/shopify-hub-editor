@@ -63,18 +63,10 @@ export function SiteHeader() {
       <AnnouncementBar />
       <div className="border-b border-border bg-nude text-nude-foreground">
         <div className="mx-auto flex h-16 max-w-6xl items-center px-5">
-          <div className="flex flex-1 justify-start">
-            <Link to="/" className="font-display text-3xl font-semibold tracking-tight text-primary">
-              Foldit
-            </Link>
-          </div>
-          <div className="hidden md:block">
-            <NavLinks />
-          </div>
-          <div className="flex flex-1 items-center justify-end gap-1">
+          <div className="flex flex-1 items-center justify-start">
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden" aria-label="Öppna meny">
+                <Button variant="ghost" size="icon" className="-ml-2 md:hidden" aria-label="Öppna meny">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
@@ -87,6 +79,17 @@ export function SiteHeader() {
                 </div>
               </SheetContent>
             </Sheet>
+            <Link to="/" className="hidden font-display text-3xl font-semibold tracking-tight text-primary md:inline">
+              Foldit
+            </Link>
+          </div>
+          <Link to="/" className="font-display text-3xl font-semibold tracking-tight text-primary md:hidden">
+            Foldit
+          </Link>
+          <div className="hidden md:block">
+            <NavLinks />
+          </div>
+          <div className="flex flex-1 items-center justify-end gap-1">
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="relative" aria-label="Öppna varukorg">
