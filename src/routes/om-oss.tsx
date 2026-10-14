@@ -53,7 +53,7 @@ function OmOss() {
         <ol className="mt-10 grid gap-8 md:grid-cols-4">
           {timeline.map((item, i) => (
             <li key={item.step} className="border-t border-foreground pt-5">
-              <span className="text-xs text-muted-foreground">0{i + 1}</span>
+              <span className="text-xs text-muted-foreground">{"\n"}</span>
               <h3 className="mt-2 font-display text-2xl font-semibold">{item.step}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
             </li>
