@@ -165,3 +165,15 @@
     letter-spacing: 0;
   }
 }
+
+.policy-body { font-size: 0.95rem; line-height: 1.75; }
+.policy-body h1 { display: none; }
+.policy-body h2 { font-family: var(--font-display, serif); font-size: 1.6rem; margin: 2rem 0 0.75rem; }
+.policy-body h3 { font-weight: 600; margin: 1.5rem 0 0.5rem; }
+.policy-body p, .policy-body ul, .policy-body ol { margin: 0 0 1rem; }
+.policy-body ul { list-style: disc; padding-left: 1.25rem; }
+.policy-body ol { list-style: decimal; padding-left: 1.25rem; }
+.policy-body a { text-decoration: underline; }
+.policy-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+.policy-body th, .policy-body td { border-bottom: 1px solid var(--border); padding: 0.5rem 0.75rem 0.5rem 0; text-align: left; vertical-align: top; }
+.policy-body td p, .policy-body th p { margin: 0; }

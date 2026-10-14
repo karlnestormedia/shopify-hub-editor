@@ -1,6 +1,7 @@
 import logoLightAsset from "@/assets/foldit-logo-light.png.asset.json";
 import { Link } from "@tanstack/react-router";
 import { Lock, Truck, RotateCcw } from "lucide-react";
+import { POLICY_KEYS, type PolicySlug } from "@/lib/shopify";
 
 const PRODUCT_HANDLE = "foldit-3-i-1-mattsats";
 
@@ -41,9 +42,16 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-obsidian-foreground/15">
-        <p className="mx-auto max-w-6xl px-5 py-5 text-xs text-obsidian-foreground/60 lg:px-8">
-          © {new Date().getFullYear()} Foldit UF · Ett UF-företag inom Ung Företagsamhet
-        </p>
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-5 text-xs text-obsidian-foreground/60 md:flex-row md:items-center md:justify-between lg:px-8">
+          <p>© {new Date().getFullYear()} Foldit UF · Ett UF-företag inom Ung Företagsamhet</p>
+          <ul className="flex flex-wrap gap-x-4 gap-y-2">
+            {(Object.keys(POLICY_KEYS) as PolicySlug[]).map((slug) => (
+              <li key={slug}>
+                <Link to="/policy/$slug" params={{ slug }} className={linkCls}>{POLICY_KEYS[slug].label}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </footer>
   );

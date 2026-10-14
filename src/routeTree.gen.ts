@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as GuideRouteImport } from './routes/guide'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as OmOssRouteImport } from './routes/om-oss'
+import { Route as PolicySlugRouteImport } from './routes/policy.$slug'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const OmOssRoute = OmOssRouteImport.update({
   path: '/om-oss',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PolicySlugRoute = PolicySlugRouteImport.update({
+  id: '/policy/$slug',
+  path: '/policy/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductHandleRoute = ProductHandleRouteImport.update({
   id: '/product/$handle',
   path: '/product/$handle',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/guide': typeof GuideRoute
   '/kontakt': typeof KontaktRoute
   '/om-oss': typeof OmOssRoute
+  '/policy/$slug': typeof PolicySlugRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/guide': typeof GuideRoute
   '/kontakt': typeof KontaktRoute
   '/om-oss': typeof OmOssRoute
+  '/policy/$slug': typeof PolicySlugRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,34 @@ export interface FileRoutesById {
   '/guide': typeof GuideRoute
   '/kontakt': typeof KontaktRoute
   '/om-oss': typeof OmOssRoute
+  '/policy/$slug': typeof PolicySlugRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/guide' | '/kontakt' | '/om-oss' | '/product/$handle'
+  fullPaths:
+    | '/'
+    | '/guide'
+    | '/kontakt'
+    | '/om-oss'
+    | '/policy/$slug'
+    | '/product/$handle'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/guide' | '/kontakt' | '/om-oss' | '/product/$handle'
-  id: '__root__' | '/' | '/guide' | '/kontakt' | '/om-oss' | '/product/$handle'
+  to:
+    | '/'
+    | '/guide'
+    | '/kontakt'
+    | '/om-oss'
+    | '/policy/$slug'
+    | '/product/$handle'
+  id:
+    | '__root__'
+    | '/'
+    | '/guide'
+    | '/kontakt'
+    | '/om-oss'
+    | '/policy/$slug'
+    | '/product/$handle'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +104,7 @@ export interface RootRouteChildren {
   GuideRoute: typeof GuideRoute
   KontaktRoute: typeof KontaktRoute
   OmOssRoute: typeof OmOssRoute
+  PolicySlugRoute: typeof PolicySlugRoute
   ProductHandleRoute: typeof ProductHandleRoute
 }
 
@@ -109,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OmOssRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/policy/$slug': {
+      id: '/policy/$slug'
+      path: '/policy/$slug'
+      fullPath: '/policy/$slug'
+      preLoaderRoute: typeof PolicySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/product/$handle': {
       id: '/product/$handle'
       path: '/product/$handle'
@@ -124,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   GuideRoute: GuideRoute,
   KontaktRoute: KontaktRoute,
   OmOssRoute: OmOssRoute,
+  PolicySlugRoute: PolicySlugRoute,
   ProductHandleRoute: ProductHandleRoute,
 }
 export const routeTree = rootRouteImport

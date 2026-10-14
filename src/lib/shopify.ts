@@ -199,3 +199,20 @@ export function withChannel(url: string) {
   u.searchParams.set("channel", "online_store");
   return u.toString();
 }
+
+export const POLICY_KEYS = {
+  "rattsligt-meddelande": { field: "legalNotice", label: "Rättsligt meddelande" },
+  kopvillkor: { field: "termsOfService", label: "Köpvillkor" },
+  integritetspolicy: { field: "privacyPolicy", label: "Integritetspolicy" },
+  returpolicy: { field: "refundPolicy", label: "Retur- och återbetalningspolicy" },
+  fraktpolicy: { field: "shippingPolicy", label: "Fraktpolicy" },
+} as const;
+export type PolicySlug = keyof typeof POLICY_KEYS;
+
+export async function fetchPolicy(slug: string): Promise<{ label: string; body: string } | null> {
+  const entry = POLICY_KEYS[slug as PolicySlug];
+  if (!entry) return null;
+  const data = await storefrontApiRequest(`{ shop { ${entry.field} { body } } }`);
+  const policy = data?.data?.shop?.[entry.field];
+  return policy ? { label: entry.label, body: policy.body } : null;
+}
