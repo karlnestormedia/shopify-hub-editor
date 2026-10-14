@@ -18,7 +18,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section aria-labelledby="how-it-works-title" className="border-t border-border bg-background py-12 sm:py-16">
+    <section aria-labelledby="how-it-works-title" className="bg-background py-12 sm:py-16">
       <div className="mx-auto max-w-6xl px-5 lg:px-8">
         <div className="mb-8 text-center sm:mb-10">
           <p className="text-xs font-medium uppercase text-muted-foreground">Tre enkla steg</p>
