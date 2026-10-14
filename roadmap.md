@@ -7,7 +7,7 @@
 
 # Kontakt
 - [x] info@foldit.se i footern och på kontaktsidan, borttaget påhittat Instagramnamn.
-- [ ] Instagramkonto: väntar på att Karl levererar namnet.
+- [x] Instagram- och TikTok-länkar i meddelanderaden (@foldituf).
 # Frontend
 - [x] Fast köplist längst ner (mobil och dator) när man scrollat förbi köpytan.
 - [x] Svep mellan produktbilder på mobil.
