@@ -2,7 +2,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const faqs = [
   {
-    q: "Vilka mått ersätter 3-i-1 måttsatsen?",
+    q: "Vilka mått har måttsatsen?",
     a: "Foldit kombinerar tre av kökets vanligaste mått i ett enda flexibelt verktyg: ½ deciliter (50 ml), 1 matsked (15 ml) och 1 tesked (5 ml). Du viker enkelt fram den storlek du behöver.",
   },
   {
