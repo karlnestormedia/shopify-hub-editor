@@ -1,3 +1,4 @@
+import logoLightAsset from "@/assets/foldit-logo-light.png.asset.json";
 import { Link } from "@tanstack/react-router";
 import { Lock, Truck, RotateCcw } from "lucide-react";
 
@@ -9,7 +10,7 @@ export function SiteFooter() {
     <footer className="bg-obsidian text-obsidian-foreground">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div>
-          <p className="font-display text-3xl font-semibold tracking-tight">Foldit</p>
+          <img src={logoLightAsset.url} alt="Foldit" className="h-8 w-auto" />
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-obsidian-foreground/70">
             Mått och slickepott i ett. Utvecklad av Foldit UF.
           </p>

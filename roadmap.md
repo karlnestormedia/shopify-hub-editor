@@ -14,3 +14,4 @@
 - [x] Mallar för Om oss och Guide.
 - [x] Lägg in fem riktiga teamporträtt med bekräftade namn och roller i växelvis layout enligt referensbilderna och verifiera Om oss.
 - [x] Byt ut "Foldit"-texten i headern mot den riktiga loggan (CDN-pekare) och sätt tab-ikonen från samma logga.
+- [x] Ersätt "Foldit"-texten i foten med en vit loggvariant (samma form, bara annan färg) så att den syns mot obsidian.
