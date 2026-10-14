@@ -95,7 +95,7 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
           <p className="mt-5 text-sm leading-relaxed"><strong className="font-medium">Mått och slickepott i ett.</strong><br />Designad för att sirap, honung och klibbig smet aldrig ska fastna i måttet.</p>
           <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
             <li><strong className="font-medium text-foreground">3 mått i samma verktyg:</strong> ½ dl, 1 msk och 1 tsk.</li>
-            <li><strong className="font-medium text-foreground">Vik & skrapa:</strong> Skrapar bunken ren i samma rörelse.</li>
+            <li><strong className="font-medium text-foreground">Vik & skrapa:</strong> Inga rester lämnas kvar i måttsatsen.</li>
             <li><strong className="font-medium text-foreground">Tar ingen plats:</strong> Förvaras helt platt i kökslådan.</li>
           </ul>
           {(product?.variants.edges.length ?? 0) > 1 && <div className="mt-4 flex flex-wrap gap-2">{product?.variants.edges.map(({ node }, index) => <Button key={node.id} size="sm" variant={index === variantIndex ? "default" : "outline"} onClick={() => setVariantIndex(index)}>{node.title}</Button>)}</div>}
