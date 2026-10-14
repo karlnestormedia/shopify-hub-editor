@@ -36,7 +36,7 @@ const sections = [
   {
     value: "skotsel", label: "Skötsel",
     steps: [
-      { title: "Skölj", text: "Vik ut helt och skölj under rinnande vatten.", image: "Utvikt Foldit under kranen" },
+      { title: "Skölj", text: "Vik ut helt och skölj under rinnande vatten, eller diska i diskmaskinen.", image: "Utvikt Foldit under kranen" },
       { title: "Torka", text: "Låt torka eller torka av med en handduk – den platta ytan torkar snabbt.", image: "Foldit torkas med kökshandduk" },
       { title: "Förvara platt", text: "Lägg den platt i kökslådan, där den tar nästan ingen plats.", image: "Foldit platt i en prydlig kökslåda" },
     ],
