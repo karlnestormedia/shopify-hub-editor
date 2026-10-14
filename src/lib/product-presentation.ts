@@ -11,3 +11,10 @@ export const productImagePlans = [
   { title: "Platt i kökslådan", instruction: "Foldit ligger utvikt och platt i en prydlig kökslåda, bredvid andra köksredskap." },
   { title: "Tre mått i ett", instruction: "Tredelad produktbild: Foldit vikt i vart och ett av sina tre mått. En tydlig måttetikett under varje del." },
 ] as const;
+/** Splits a Shopify title like "Foldit Måttsatsen (Förbeställning)" into name + pre-order flag. */
+export function parseProductTitle(title: string | undefined, fallback = "Foldit Måttsatsen") {
+  const raw = (title ?? fallback).replace(/\s+/g, " ").trim();
+  const preorder = /\(\s*förbeställning\s*\)/i.test(raw);
+  const name = raw.replace(/\(\s*förbeställning\s*\)/i, "").trim() || fallback;
+  return { name, preorder };
+}

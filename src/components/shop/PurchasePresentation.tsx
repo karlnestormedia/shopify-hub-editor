@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { formatPrice, type ShopifyProduct } from "@/lib/shopify";
-import { formatDeliveryWindow, productImagePlans } from "@/lib/product-presentation";
+import { formatDeliveryWindow, parseProductTitle, productImagePlans } from "@/lib/product-presentation";
 import { useCartStore } from "@/stores/cartStore";
 import { StickyBuyBar } from "@/components/shop/StickyBuyBar";
 
@@ -25,6 +25,7 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
   const visibleImageIndex = isPreviewing && imageIndex === 0 ? 1 : imageIndex;
   const imagePlan = productImagePlans[visibleImageIndex] ?? productImagePlans[0];
   const Heading = heading;
+  const { name, preorder } = parseProductTitle(product?.title);
 
   async function add() {
     if (!variant) return;
@@ -52,8 +53,8 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
   }, []);
 
   return (
-    <section ref={sectionRef} aria-label="Köp Foldit 3-i-1" className="mx-auto max-w-6xl px-5 py-8 sm:py-10 lg:px-8">
-      <StickyBuyBar visible={showSticky} price={variant ? formatPrice(variant.price.amount, variant.price.currencyCode) : undefined} disabled={loading || !variant} loading={loading} onAdd={add} />
+    <section ref={sectionRef} aria-label={`Köp ${name}`} className="mx-auto max-w-6xl px-5 py-8 sm:py-10 lg:px-8">
+      <StickyBuyBar visible={showSticky} price={variant ? formatPrice(variant.price.amount, variant.price.currencyCode) : undefined} disabled={loading || !variant} loading={loading} onAdd={add} name={name} preorder={preorder} />
       <div className="grid items-stretch gap-6 md:grid-cols-2 lg:gap-10">
         <div className="flex min-w-0 flex-col gap-3" data-testid="purchase-gallery">
           <div className="relative flex aspect-[4/5] touch-pan-y select-none flex-col justify-center bg-destructive p-6 text-center text-destructive-foreground md:aspect-auto md:min-h-[460px] md:flex-1" aria-live="polite"
@@ -89,7 +90,8 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
         </div>
 
         <div className="flex min-w-0 flex-col" data-testid="purchase-details">
-          <Heading className="text-4xl font-semibold leading-tight lg:text-5xl">Foldit 3-i-1 måttsats</Heading>
+          {preorder && <span className="mb-3 self-start border border-obsidian px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em]">Förbeställning</span>}
+          <Heading className="text-4xl font-semibold leading-tight lg:text-5xl">{name}</Heading>
           {variant && <p className="mt-3 text-xl font-medium">{formatPrice(variant.price.amount, variant.price.currencyCode)}</p>}
           {isLoading && <p className="mt-3 text-sm text-muted-foreground">Laddar…</p>}
           <p className="mt-5 text-sm leading-relaxed"><strong className="font-medium">Mått och slickepott i ett.</strong><br />Designad för att sirap, honung och klibbig smet aldrig ska fastna i måttet.</p>
