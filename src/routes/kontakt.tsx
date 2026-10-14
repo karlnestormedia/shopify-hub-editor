@@ -43,7 +43,7 @@ function Kontakt() {
           <div>
             <h2 className="text-2xl font-semibold">Frakt och beställningar</h2>
             <p className="mt-3 text-muted-foreground">
-              Frakt och betalning sköts i Shopifys kassa. Har du frågor om en beställning som lagts
+              Frakt och betalning sköts i kassan. Har du frågor om en beställning som lagts
               där, hör av dig så hjälper vi dig.
             </p>
           </div>
