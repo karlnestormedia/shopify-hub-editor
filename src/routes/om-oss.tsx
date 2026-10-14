@@ -63,7 +63,7 @@ function OmOss() {
       <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-16 lg:px-8">
           <h2 className="font-display text-3xl font-semibold sm:text-4xl">Teamet bakom Foldit</h2>
-          <div className="mt-10 space-y-10 md:space-y-4">
+          <div className="mt-10 space-y-10 md:space-y-0">
             {team.map((p, i) => (
               <article key={p.name} aria-labelledby={`team-${i}`} className="grid items-center md:grid-cols-2">
                 <img
@@ -75,7 +75,7 @@ function OmOss() {
                   decoding="async"
                   className={`aspect-[6/5] w-full object-cover ${i % 2 === 1 ? "md:order-2" : ""}`}
                 />
-                <div className={`py-7 md:px-8 md:py-10 lg:px-12 ${i % 2 === 1 ? "md:order-1 md:pl-0 lg:pl-0" : ""}`}>
+                <div className={`py-7 md:px-8 md:py-6 lg:px-12 ${i % 2 === 1 ? "md:order-1 md:pl-0 lg:pl-0" : ""}`}>
                   <p className="text-xs uppercase text-muted-foreground">{p.role}</p>
                   <h3 id={`team-${i}`} className="mt-3 font-display text-4xl font-semibold leading-tight lg:text-5xl">{p.name}</h3>
                   <p className="mt-6 max-w-md text-sm leading-7 text-muted-foreground sm:text-base">{p.description}</p>
