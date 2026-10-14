@@ -12,3 +12,4 @@
 - [x] Fast köplist längst ner (mobil och dator) när man scrollat förbi köpytan.
 - [x] Svep mellan produktbilder på mobil.
 - [x] Mallar för Om oss och Guide.
+- [x] Lägg in fem riktiga teamporträtt med bekräftade namn och roller i växelvis layout enligt referensbilderna och verifiera Om oss.

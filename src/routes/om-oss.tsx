@@ -1,5 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/shop/PageShell";
+import melvinPortrait from "@/assets/team/melvin-cronzell.jpg.asset.json";
+import emilPortrait from "@/assets/team/emil-nestor.jpg.asset.json";
+import isabellePortrait from "@/assets/team/isabelle-montelius.jpg.asset.json";
+import karlPortrait from "@/assets/team/karl-nestor.jpg.asset.json";
+import melkerPortrait from "@/assets/team/melker-lehnberg.jpg.asset.json";
 
 export const Route = createFileRoute("/om-oss")({
   head: () => ({
@@ -23,9 +28,11 @@ const timeline = [
 ];
 
 const team = [
-  { name: "Namn Efternamn", role: "VD" },
-  { name: "Namn Efternamn", role: "Ekonomiansvarig" },
-  { name: "Namn Efternamn", role: "Marknadsansvarig" },
+  { name: "Melvin Cronzell", role: "VD", image: melvinPortrait.url, description: "Melvin håller i trådarna. Han samordnar arbetet och ser till att vi tar nästa steg tillsammans – från idé till färdig måttsats." },
+  { name: "Emil Nestor", role: "Ekonomiansvarig", image: emilPortrait.url, description: "Emil har koll på Foldits ekonomi. Han ansvarar för budget, bokföring och uppföljning av våra inköp och försäljningar." },
+  { name: "Isabelle Montelius", role: "Marknadsföringsansvarig", image: isabellePortrait.url, description: "Isabelle ansvarar för hur Foldit syns. Genom bilder, kampanjer och våra sociala medier får fler upptäcka måttsatsen och hur den används." },
+  { name: "Karl Nestor", role: "Produktansvarig", image: karlPortrait.url, description: "Karl har hand om själva produkten. Han arbetar med design, material och tillverkning – med fokus på att göra Foldit enkelt att mäta, vika och skrapa med." },
+  { name: "Melker Lehnberg", role: "Säljansvarig", image: melkerPortrait.url, description: "Melker ansvarar för Foldits försäljning och kundkontakter. Han hjälper fler att hitta måttsatsen och tar tillvara frågor och feedback från våra kunder." },
 ];
 
 function OmOss() {
@@ -57,15 +64,24 @@ function OmOss() {
       <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-16 lg:px-8">
           <h2 className="font-display text-3xl font-semibold sm:text-4xl">Teamet bakom Foldit</h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          <div className="mt-10 space-y-10 md:space-y-4">
             {team.map((p, i) => (
-              <div key={i}>
-                <div className="flex aspect-[4/5] items-center justify-center bg-destructive p-6 text-center text-xs uppercase text-destructive-foreground">
-                  Lägg in porträtt – ljus bakgrund, samma beskärning för alla
+              <article key={p.name} aria-labelledby={`team-${i}`} className="grid items-center md:grid-cols-2">
+                <img
+                  src={p.image}
+                  alt={`${p.name}, ${p.role} på Foldit UF`}
+                  width={1200}
+                  height={1000}
+                  loading="lazy"
+                  decoding="async"
+                  className={`aspect-[6/5] w-full object-cover ${i % 2 === 1 ? "md:order-2" : ""}`}
+                />
+                <div className={`py-7 md:px-8 md:py-10 lg:px-12 ${i % 2 === 1 ? "md:order-1 md:pl-0 lg:pl-0" : ""}`}>
+                  <p className="text-xs uppercase text-muted-foreground">{p.role}</p>
+                  <h3 id={`team-${i}`} className="mt-3 font-display text-4xl font-semibold leading-tight lg:text-5xl">{p.name}</h3>
+                  <p className="mt-6 max-w-md text-sm leading-7 text-muted-foreground sm:text-base">{p.description}</p>
                 </div>
-                <p className="mt-4 font-display text-xl font-semibold">{p.name}</p>
-                <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{p.role}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
