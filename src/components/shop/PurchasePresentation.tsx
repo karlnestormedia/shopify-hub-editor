@@ -45,12 +45,14 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-    const LEAD = 7 * 100; // ca 7 små muse-scrollar (≈100 px per steg) — samma trösel på alla sidor
+    // Listen kommer när köpsektionens underkant har glidit 665 px ovanför skärmens underkant
+    // — alltså exakt där Karl stod på startsidan. Samma punkt på alla sidor.
+    const PASS = 665;
     let raf = 0;
     const update = () => {
       raf = 0;
       const rect = el.getBoundingClientRect();
-      setShowSticky(window.scrollY >= LEAD && rect.bottom <= window.innerHeight);
+      setShowSticky(window.innerHeight - rect.bottom >= PASS);
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
@@ -58,24 +60,9 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
-    // TEMPORÄR: skickar scroll-läget till servern så att tröskeln kan sättas exakt
-    const ping = () => {
-      const rect = el.getBoundingClientRect();
-      const q = new URLSearchParams({
-        y: String(Math.round(window.scrollY)),
-        top: String(Math.round(rect.top)),
-        bottom: String(Math.round(rect.bottom)),
-        vh: String(Math.round(window.innerHeight)),
-        max: String(Math.round(document.documentElement.scrollHeight - window.innerHeight)),
-      });
-      fetch(`/api/public/scroll?${q}`, { cache: "no-store" }).catch(() => {});
-    };
-    ping();
-    const iv = window.setInterval(ping, 1000);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
-      window.clearInterval(iv);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
