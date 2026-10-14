@@ -33,7 +33,7 @@ function Kontakt() {
           <div>
             <h2 className="text-2xl font-semibold">Hör av dig</h2>
             <p className="mt-3 text-muted-foreground">
-              Skicka ett meddelande till{" "}
+              Skicka ett mail till{" "}
               <a href="mailto:info@foldit.se" className="font-medium text-foreground underline underline-offset-4">
                 info@foldit.se
               </a>{" "}
