@@ -52,9 +52,10 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
     const update = () => {
       raf = 0;
       const rect = el.getBoundingClientRect();
-      // Göm listen när sidfoten kommer in i bild, så att policylänkarna inte täcks.
-      const footer = document.querySelector("footer");
-      const footerVisible = !!footer && footer.getBoundingClientRect().top < window.innerHeight - 8;
+      // Listen hänger kvar genom hela sidfoten och gömmer sig först när raden med
+      // policylänkar (sidfotens sista rad) kommer upp i bild, så att länkarna inte täcks.
+      const legalRow = document.querySelector("footer")?.lastElementChild;
+      const footerVisible = !!legalRow && legalRow.getBoundingClientRect().top < window.innerHeight - 8;
       setShowSticky(window.innerHeight - rect.bottom >= PASS && !footerVisible);
     };
     const onScroll = () => {
