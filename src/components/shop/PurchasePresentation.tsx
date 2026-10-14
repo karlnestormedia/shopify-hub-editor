@@ -108,7 +108,7 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
           <Accordion type="single" collapsible className="mt-auto pt-2">
             <AccordionItem value="measures"><AccordionTrigger className="py-3">Specifikationer & mått</AccordionTrigger><AccordionContent>Tre mått i ett verktyg: 1 tsk, 1 msk och ½ dl. Viks ut helt platt för förvaring.</AccordionContent></AccordionItem>
             <AccordionItem value="delivery"><AccordionTrigger className="py-3">Frakt & leverans</AccordionTrigger><AccordionContent>{formatDeliveryWindow()}. Fraktalternativ och kostnad visas i kassan.</AccordionContent></AccordionItem>
-            <AccordionItem value="care"><AccordionTrigger className="py-3">Skötsel & rengöring</AccordionTrigger><AccordionContent>Vik ut måttet och skölj av under rinnande vatten. Låt torka innan det läggs i kökslådan.</AccordionContent></AccordionItem>
+            <AccordionItem value="care"><AccordionTrigger className="py-3">Skötsel & rengöring</AccordionTrigger><AccordionContent>Vik ut måttet och skölj av under rinnande vatten eller diska i diskmaskinen. Låt torka innan det läggs i kökslådan.</AccordionContent></AccordionItem>
           </Accordion>
         </div>
       </div>
