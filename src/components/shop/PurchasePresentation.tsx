@@ -101,7 +101,7 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
           {(product?.variants.edges.length ?? 0) > 1 && <div className="mt-4 flex flex-wrap gap-2">{product?.variants.edges.map(({ node }, index) => <Button key={node.id} size="sm" variant={index === variantIndex ? "default" : "outline"} onClick={() => setVariantIndex(index)}>{node.title}</Button>)}</div>}
           <Button size="lg" className="mt-5 h-12 w-full rounded-none bg-obsidian text-xs uppercase text-obsidian-foreground hover:bg-obsidian/90" disabled={loading || !variant} onClick={add}>{loading ? "Lägger till…" : "Lägg i varukorg"}</Button>
           <div className="mt-4 grid grid-cols-3 gap-2 border-b border-border pb-4 text-center text-[11px] leading-relaxed text-muted-foreground">
-            <div className="flex flex-col items-center gap-2"><CreditCard className="h-5 w-5 text-foreground" strokeWidth={1.5} aria-hidden="true" /><span>Säker betalning<br />via Shopify</span></div>
+            <div className="flex flex-col items-center gap-2"><CreditCard className="h-5 w-5 text-foreground" strokeWidth={1.5} aria-hidden="true" /><span>Säker betalning</span></div>
             <div className="flex flex-col items-center gap-2"><Truck className="h-5 w-5 text-foreground" strokeWidth={1.5} aria-hidden="true" /><span>{formatDeliveryWindow()}</span></div>
             <div className="flex flex-col items-center gap-2"><RotateCcw className="h-5 w-5 text-foreground" strokeWidth={1.5} aria-hidden="true" /><span>14 dagars<br />öppet köp</span></div>
           </div>
