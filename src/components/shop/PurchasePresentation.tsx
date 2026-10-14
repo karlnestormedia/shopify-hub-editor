@@ -52,7 +52,10 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
     const update = () => {
       raf = 0;
       const rect = el.getBoundingClientRect();
-      setShowSticky(window.innerHeight - rect.bottom >= PASS);
+      // Göm listen när sidfoten kommer in i bild, så att policylänkarna inte täcks.
+      const footer = document.querySelector("footer");
+      const footerVisible = !!footer && footer.getBoundingClientRect().top < window.innerHeight - 8;
+      setShowSticky(window.innerHeight - rect.bottom >= PASS && !footerVisible);
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
