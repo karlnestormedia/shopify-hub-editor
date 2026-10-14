@@ -26,7 +26,7 @@ export function StickyBuyBar({ visible, price, disabled, loading, onAdd, name, p
           disabled={disabled}
           onClick={onAdd}
         >
-          {loading ? "Lägger till…" : "Lägg i varukorg"}
+          {loading ? "Lägger till…" : "Förbeställ"}
         </Button>
       </div>
     </div>

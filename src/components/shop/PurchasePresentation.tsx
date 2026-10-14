@@ -90,7 +90,6 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
         </div>
 
         <div className="flex min-w-0 flex-col" data-testid="purchase-details">
-          {preorder && <span className="mb-3 self-start border border-obsidian px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em]">Förbeställning</span>}
           <Heading className="text-4xl font-semibold leading-tight lg:text-5xl">{name}</Heading>
           {variant && <p className="mt-3 text-xl font-medium">{formatPrice(variant.price.amount, variant.price.currencyCode)}</p>}
           {isLoading && <p className="mt-3 text-sm text-muted-foreground">Laddar…</p>}
@@ -101,7 +100,7 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
             <li><strong className="font-medium text-foreground">Tar ingen plats:</strong> Förvaras helt platt i kökslådan.</li>
           </ul>
           {(product?.variants.edges.length ?? 0) > 1 && <div className="mt-4 flex flex-wrap gap-2">{product?.variants.edges.map(({ node }, index) => <Button key={node.id} size="sm" variant={index === variantIndex ? "default" : "outline"} onClick={() => setVariantIndex(index)}>{node.title}</Button>)}</div>}
-          <Button size="lg" className="mt-5 h-12 w-full rounded-none bg-obsidian text-xs uppercase text-obsidian-foreground hover:bg-obsidian/90" disabled={loading || !variant} onClick={add}>{loading ? "Lägger till…" : "Lägg i varukorg"}</Button>
+          <Button size="lg" className="mt-5 h-12 w-full rounded-none bg-obsidian text-xs uppercase text-obsidian-foreground hover:bg-obsidian/90" disabled={loading || !variant} onClick={add}>{loading ? "Lägger till…" : "Förbeställ"}</Button>
           <div className="mt-4 grid grid-cols-3 gap-2 border-b border-border pb-4 text-center text-[11px] leading-relaxed text-muted-foreground">
             <div className="flex flex-col items-center gap-2"><CreditCard className="h-5 w-5 text-foreground" strokeWidth={1.5} aria-hidden="true" /><span>Säker betalning</span></div>
             <div className="flex flex-col items-center gap-2"><Truck className="h-5 w-5 text-foreground" strokeWidth={1.5} aria-hidden="true" /><span>{formatDeliveryWindow()}</span></div>
