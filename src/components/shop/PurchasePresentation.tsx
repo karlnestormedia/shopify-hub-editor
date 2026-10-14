@@ -45,12 +45,12 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-    const LEAD = 7 * 100; // ca 7 små muse-scrollar (≈100 px per steg) tidigare än helt förbi
+    const LEAD = 7 * 100; // ca 7 små muse-scrollar (≈100 px per steg) — samma trösel på alla sidor
     let raf = 0;
     const update = () => {
       raf = 0;
       const rect = el.getBoundingClientRect();
-      setShowSticky(rect.bottom < LEAD && (rect.top < 0 || window.scrollY > 4));
+      setShowSticky(window.scrollY >= LEAD && rect.bottom <= window.innerHeight);
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
