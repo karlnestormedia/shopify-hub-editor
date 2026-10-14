@@ -14,7 +14,6 @@ import { Route as GuideRouteImport } from './routes/guide'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as OmOssRouteImport } from './routes/om-oss'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
-import { Route as ApiPublicScrollRouteImport } from './routes/api/public/scroll'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -41,11 +40,6 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
   path: '/product/$handle',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicScrollRoute = ApiPublicScrollRouteImport.update({
-  id: '/api/public/scroll',
-  path: '/api/public/scroll',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,7 +47,6 @@ export interface FileRoutesByFullPath {
   '/kontakt': typeof KontaktRoute
   '/om-oss': typeof OmOssRoute
   '/product/$handle': typeof ProductHandleRoute
-  '/api/public/scroll': typeof ApiPublicScrollRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,7 +54,6 @@ export interface FileRoutesByTo {
   '/kontakt': typeof KontaktRoute
   '/om-oss': typeof OmOssRoute
   '/product/$handle': typeof ProductHandleRoute
-  '/api/public/scroll': typeof ApiPublicScrollRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -70,33 +62,13 @@ export interface FileRoutesById {
   '/kontakt': typeof KontaktRoute
   '/om-oss': typeof OmOssRoute
   '/product/$handle': typeof ProductHandleRoute
-  '/api/public/scroll': typeof ApiPublicScrollRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/guide'
-    | '/kontakt'
-    | '/om-oss'
-    | '/product/$handle'
-    | '/api/public/scroll'
+  fullPaths: '/' | '/guide' | '/kontakt' | '/om-oss' | '/product/$handle'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/guide'
-    | '/kontakt'
-    | '/om-oss'
-    | '/product/$handle'
-    | '/api/public/scroll'
-  id:
-    | '__root__'
-    | '/'
-    | '/guide'
-    | '/kontakt'
-    | '/om-oss'
-    | '/product/$handle'
-    | '/api/public/scroll'
+  to: '/' | '/guide' | '/kontakt' | '/om-oss' | '/product/$handle'
+  id: '__root__' | '/' | '/guide' | '/kontakt' | '/om-oss' | '/product/$handle'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -105,7 +77,6 @@ export interface RootRouteChildren {
   KontaktRoute: typeof KontaktRoute
   OmOssRoute: typeof OmOssRoute
   ProductHandleRoute: typeof ProductHandleRoute
-  ApiPublicScrollRoute: typeof ApiPublicScrollRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -145,13 +116,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductHandleRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/scroll': {
-      id: '/api/public/scroll'
-      path: '/api/public/scroll'
-      fullPath: '/api/public/scroll'
-      preLoaderRoute: typeof ApiPublicScrollRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -161,7 +125,6 @@ const rootRouteChildren: RootRouteChildren = {
   KontaktRoute: KontaktRoute,
   OmOssRoute: OmOssRoute,
   ProductHandleRoute: ProductHandleRoute,
-  ApiPublicScrollRoute: ApiPublicScrollRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
