@@ -58,9 +58,24 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    // TEMPORÄR: skickar scroll-läget till servern så att tröskeln kan sättas exakt
+    const ping = () => {
+      const rect = el.getBoundingClientRect();
+      const q = new URLSearchParams({
+        y: String(Math.round(window.scrollY)),
+        top: String(Math.round(rect.top)),
+        bottom: String(Math.round(rect.bottom)),
+        vh: String(Math.round(window.innerHeight)),
+        max: String(Math.round(document.documentElement.scrollHeight - window.innerHeight)),
+      });
+      fetch(`/api/public/scroll?${q}`, { cache: "no-store" }).catch(() => {});
+    };
+    ping();
+    const iv = window.setInterval(ping, 1000);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      window.clearInterval(iv);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
