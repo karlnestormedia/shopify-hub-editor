@@ -2,7 +2,7 @@ const steps = [
   {
     title: "Mät",
     image: "Närbild på Foldit vikt som ett mått. En hand häller gyllene sirap i måttet. Visa måttets form och sirapen tydligt.",
-    caption: "Välj ditt mått och fyll med sirap, honung eller smet.",
+    caption: "Välj ditt mått och mät sedan upp ingrediensen",
   },
   {
     title: "Vik",
@@ -23,7 +23,7 @@ export function HowItWorks() {
         <div className="mb-8 text-center sm:mb-10">
           <p className="text-xs font-medium uppercase text-muted-foreground">Tre enkla steg</p>
           <h2 id="how-it-works-title" className="mt-3 font-display text-4xl font-semibold sm:text-5xl">Så använder du Foldit</h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Från mått till slickepott i en rörelse.</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Från mått till slickepott.</p>
         </div>
         <ol className="grid gap-8 md:grid-cols-3 md:gap-5 lg:gap-6">
           {steps.map((step, index) => (
