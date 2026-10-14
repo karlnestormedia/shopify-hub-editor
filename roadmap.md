@@ -16,3 +16,4 @@
 - [x] Byt ut "Foldit"-texten i headern mot den riktiga loggan (CDN-pekare) och sätt tab-ikonen från samma logga.
 - [x] Ersätt "Foldit"-texten i foten med en vit loggvariant (samma form, bara annan färg) så att den syns mot obsidian.
 - [x] Kortat fotens "Säker betalning via Shopify" till "Säker betalning" så att Shopify inte syns i någon kundtext.
+- [x] satt förbeställ-listens tröskel till exakt den punkt Karl stod på på startsidan (köpsektionens underkant 665 px ovanför skärmens underkant), verifierad på både start- och produktsida.
