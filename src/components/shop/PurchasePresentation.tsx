@@ -45,12 +45,14 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-    const LEAD = 7 * 100; // ca 7 små muse-scrollar (≈100 px per steg) — samma trösel på alla sidor
+    // Listen kommer när köpsektionens underkant har glidit 665 px ovanför skärmens underkant
+    // — alltså exakt där Karl stod på startsidan. Samma punkt på alla sidor.
+    const PASS = 665;
     let raf = 0;
     const update = () => {
       raf = 0;
       const rect = el.getBoundingClientRect();
-      setShowSticky(window.scrollY >= LEAD && rect.bottom <= window.innerHeight);
+      setShowSticky(window.innerHeight - rect.bottom >= PASS);
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
