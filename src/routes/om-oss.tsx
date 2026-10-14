@@ -43,7 +43,7 @@ function OmOss() {
           <p className="mb-4 text-xs uppercase tracking-[0.2em] text-muted-foreground">Foldit UF</p>
           <h1 className="max-w-2xl font-display text-5xl font-semibold leading-[1.05] sm:text-6xl">Ett redskap. Tre mått. Ingenting som fastnar.</h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-            Vi är ett UF-företag som vill göra bakning lite enklare – med en måttsats som också är en slickepott och som tar nästan ingen plats.
+            Vi är ett UF-företag som vill göra bakning lite enklare – med en kombinerad måttsats och slickepott i en och samma produkt.
           </p>
         </div>
       </section>
