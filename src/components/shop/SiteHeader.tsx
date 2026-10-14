@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import logoAsset from "@/assets/foldit-logo.png.asset.json";
 import { AnnouncementBar } from "@/components/shop/AnnouncementBar";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
