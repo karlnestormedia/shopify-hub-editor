@@ -79,12 +79,12 @@ export function SiteHeader() {
                 </div>
               </SheetContent>
             </Sheet>
-            <Link to="/" className="hidden font-display text-3xl font-semibold tracking-tight text-primary md:inline">
-              Foldit
+            <Link to="/" className="hidden items-center md:inline-flex" aria-label="Foldit – till startsidan">
+              <img src={logoAsset.url} alt="Foldit" className="h-7 w-auto" />
             </Link>
           </div>
-          <Link to="/" className="font-display text-3xl font-semibold tracking-tight text-primary md:hidden">
-            Foldit
+          <Link to="/" className="inline-flex items-center md:hidden" aria-label="Foldit – till startsidan">
+            <img src={logoAsset.url} alt="Foldit" className="h-6 w-auto" />
           </Link>
           <div className="hidden md:block">
             <NavLinks />
