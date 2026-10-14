@@ -2,17 +2,17 @@ const steps = [
   {
     title: "Mät",
     image: "Närbild på Foldit vikt som ett mått. En hand häller gyllene sirap i måttet. Visa måttets form och sirapen tydligt.",
-    caption: "Välj ditt mått och mät sedan upp ingrediensen",
+    caption: "Välj mått och mät sedan upp ingrediensen.",
   },
   {
     title: "Vik",
     image: "Visa händerna som viker ut det sirapsfyllda måttet till en plan yta ovanför bunken. Fånga övergången från mått till slickepott.",
-    caption: "Vik ut Foldit till en slickepott över bunken.",
+    caption: "Vik ut din Foldit till en slickepott över bunken.",
   },
   {
     title: "Skrapa",
     image: "Närbild på det utvikta måttet som dras mot bunkens kant. Visa hur den sista sirapen skrapas ner i smeten.",
-    caption: "Skrapa av mot kanten så att sirapen hamnar i smeten.",
+    caption: "Skrapa av resterna mot bunkens kant.",
   },
 ] as const;
 
