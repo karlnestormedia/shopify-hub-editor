@@ -13,3 +13,4 @@
 - [x] Svep mellan produktbilder på mobil.
 - [x] Mallar för Om oss och Guide.
 - [x] Lägg in fem riktiga teamporträtt med bekräftade namn och roller i växelvis layout enligt referensbilderna och verifiera Om oss.
+- [x] Byt ut "Foldit"-texten i headern mot den riktiga loggan (CDN-pekare) och sätt tab-ikonen från samma logga.
