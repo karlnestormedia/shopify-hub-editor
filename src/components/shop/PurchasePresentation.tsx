@@ -45,11 +45,23 @@ export function PurchasePresentation({ product, isLoading = false, heading = "h2
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry) setShowSticky(!entry.isIntersecting && entry.boundingClientRect.top < 0);
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const rect = el.getBoundingClientRect();
+      setShowSticky(rect.bottom <= window.innerHeight && (rect.top < 0 || window.scrollY > 4));
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
