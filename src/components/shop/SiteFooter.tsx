@@ -34,7 +34,7 @@ export function SiteFooter() {
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.18em]">Handla tryggt</p>
           <ul className="mt-4 space-y-2 text-sm text-obsidian-foreground/70">
-            <li className="flex items-center gap-2"><Lock className="h-4 w-4" />Säker betalning via Shopify</li>
+            <li className="flex items-center gap-2"><Lock className="h-4 w-4" />Säker betalning</li>
             <li className="flex items-center gap-2"><Truck className="h-4 w-4" />1-3 dagars leveranstid</li>
             <li className="flex items-center gap-2"><RotateCcw className="h-4 w-4" />14 dagars öppet köp</li>
           </ul>
