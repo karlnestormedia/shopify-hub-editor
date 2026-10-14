@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { AnnouncementBar } from "@/components/shop/AnnouncementBar";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { formatPrice, withChannel } from "@/lib/shopify";
@@ -59,9 +60,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40">
-      <div className="bg-obsidian py-2 text-center text-xs tracking-wide text-obsidian-foreground">
-        Foldit är under produktion - Förbeställning öppnar snart!
-      </div>
+      <AnnouncementBar />
       <div className="border-b border-border bg-nude text-nude-foreground">
         <div className="mx-auto flex h-16 max-w-6xl items-center px-5">
           <div className="flex flex-1 justify-start">
